@@ -61,7 +61,7 @@ const Empdashboard = () => {
                   className="nav-link text-white px-0 align-middle"
                 >
                   <i class="fs-4 bi bi-receipt ms-2"></i>
-                 
+
                   <span className="ms-2 d-none d-sm-inline">Salary Report</span>
                 </Link>
               </li>
@@ -71,7 +71,7 @@ const Empdashboard = () => {
                   className="nav-link text-white px-0 align-middle"
                 >
                   <i class="bi bi-calendar-check fs-4 ms-2"></i>
-                 
+
                   <span className="ms-2 d-none d-sm-inline">Attendence</span>
                 </Link>
               </li>
