@@ -8,7 +8,7 @@ const EditEmployee = () => {
     const [employee, setEmployee] = useState({
       Employee_Name: "",
       Email: "",
-      // Password: "",
+
       Dob: "",
       Contact_no: "",
       Gender: "",

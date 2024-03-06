@@ -12,7 +12,7 @@ const EmployeeDetail = () => {
     useEffect(() => {
         axios.get('http://localhost:4000/employee/getEmployee/'+Empid)
         .then(result => {
-            // console.log(result.data.firstName)
+     
             setEmployee(result.data)
         })
         .catch(err => console.log(err))
