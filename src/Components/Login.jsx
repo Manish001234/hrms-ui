@@ -18,7 +18,7 @@ const Login = () => {
         event.preventDefault()
         axios.post('http://localhost:4000/auth/login', values)
         .then(result => {
-    
+
             if(result.data.role==="admin") {
                 
                 localStorage.setItem("valid", true)

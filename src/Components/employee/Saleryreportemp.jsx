@@ -153,7 +153,7 @@ const Saleryreportemp = () => {
             ))}
           </select>
 
-          {/* Dropdown for selecting month */}
+        
           <select
             className="form-select"
             value={selectedMonth}
