@@ -12,7 +12,6 @@ const Leavelist = () => {
       .get("http://localhost:4000/leave/all")
       .then((result) => {
         if (result.data) {
-     
           const leaveData = result.data.map((leaveItem) => ({
             ...leaveItem,
             processed: false,
@@ -25,27 +24,28 @@ const Leavelist = () => {
       .catch((err) => console.log(err));
   }, []);
 
-
-
   const handleAccept = async (e) => {
     const leaveId = e.Leave_id;
-  
+
     if (e.Status === "Accepted" || e.Status === "Rejected") {
       return;
     }
-  
+
     const postData = {
       leaveId: leaveId,
       Status: "Accepted",
     };
-  
+
     try {
-      const result = await axios.post("http://localhost:4000/admin/leave/accept", postData);
-  
+      const result = await axios.post(
+        "http://localhost:4000/admin/leave/accept",
+        postData
+      );
+
       if (result.data) {
         // Send email after accepting
         await sendEmail(leaveId, "Accepted");
-  
+
         setLeave((prevLeave) =>
           prevLeave.map((leaveItem) =>
             leaveItem.Leave_id === leaveId
@@ -60,26 +60,28 @@ const Leavelist = () => {
       console.log(err);
     }
   };
-  
+
   const handleReject = async (e) => {
     const leaveId = e.Leave_id;
-  
+
     if (e.Status === "Accepted" || e.Status === "Rejected") {
       return;
     }
-  
+
     const postData = {
       leaveId: leaveId,
       Status: "Rejected",
     };
-  
+
     try {
-      const result = await axios.post("http://localhost:4000/admin/leave/reject", postData);
-  
+      const result = await axios.post(
+        "http://localhost:4000/admin/leave/reject",
+        postData
+      );
+
       if (result.data) {
-        // Send email after rejecting
         await sendEmail(leaveId, "Rejected");
-  
+
         setLeave((prevLeave) =>
           prevLeave.map((leaveItem) =>
             leaveItem.Leave_id === leaveId
@@ -94,29 +96,25 @@ const Leavelist = () => {
       console.log(err);
     }
   };
-  
 
   const sendEmail = (leaveId, status) => {
-
- 
     const employeeName = leave[0].Name;
-  
+
     fetch("https://formsubmit.co/ajax/manish@mushroomworldbpl.com", {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        "Content-Type": "application/json",
+        Accept: "application/json",
       },
       body: JSON.stringify({
         Message: `Hai ${employeeName}, Your leave has been ${status.toUpperCase()}`,
-
-      })
+      }),
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         alert("Email sent successfully");
       })
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
   };
   return (
     <div className="px-5 mt-3">

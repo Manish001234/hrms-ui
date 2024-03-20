@@ -7,7 +7,7 @@ const Attendence = () => {
   const [selectedName, setSelectedName] = useState('');
 
   useEffect(() => {
-    // Fetch attendance records for the employee
+  
     axios.get("http://localhost:4000/attendence/all")
       .then(response => {
         setAttendanceRecords(response.data);
