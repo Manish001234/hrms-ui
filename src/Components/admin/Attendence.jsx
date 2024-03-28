@@ -1,19 +1,19 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 
 const Attendence = () => {
   const [attendanceRecords, setAttendanceRecords] = useState([]);
-  const [selectedDate, setSelectedDate] = useState('');
-  const [selectedName, setSelectedName] = useState('');
+  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedName, setSelectedName] = useState("");
 
   useEffect(() => {
-  
-    axios.get("http://localhost:4000/attendence/all")
-      .then(response => {
+    axios
+      .get("http://localhost:4000/attendence/all")
+      .then((response) => {
         setAttendanceRecords(response.data);
       })
-      .catch(error => {
-        console.error('Error fetching attendance records:', error);
+      .catch((error) => {
+        console.error("Error fetching attendance records:", error);
       });
   }, []);
 
@@ -23,9 +23,13 @@ const Attendence = () => {
   const handleNameChange = (event) => {
     setSelectedName(event.target.value);
   };
-  const filteredAttendanceRecords = attendanceRecords.filter(record => {
-    const dateCondition = selectedDate ? record.Punch_In.includes(selectedDate) : true;
-    const nameCondition = selectedName ? record.employeeDetails.Employee_Name.includes(selectedName) : true;
+  const filteredAttendanceRecords = attendanceRecords.filter((record) => {
+    const dateCondition = selectedDate
+      ? record.Punch_In.includes(selectedDate)
+      : true;
+    const nameCondition = selectedName
+      ? record.employeeDetails.Employee_Name.includes(selectedName)
+      : true;
 
     return dateCondition && nameCondition;
   });
@@ -56,7 +60,7 @@ const Attendence = () => {
           <table className="table">
             <thead>
               <tr>
-              <th>Employee Name</th>
+                <th>Employee Name</th>
                 <th>Punch In</th>
                 <th>Punch Out</th>
                 <th>Attendance Type</th>
@@ -64,11 +68,11 @@ const Attendence = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredAttendanceRecords.map(record => (
+              {filteredAttendanceRecords.map((record) => (
                 <tr key={record._id}>
                   <td>{record.employeeDetails.Employee_Name}</td>
-                  <td>{record.Punch_In || 'Not available'}</td>
-                  <td>{record.Punch_Out || 'Not available'}</td>
+                  <td>{record.Punch_In || "Not available"}</td>
+                  <td>{record.Punch_Out || "Not available"}</td>
                   <td>{record.Attendance_Type}</td>
                   <td>{record.Employee_Id}</td>
                 </tr>
@@ -79,6 +83,6 @@ const Attendence = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Attendence;
